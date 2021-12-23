@@ -1,0 +1,73 @@
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+		  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+		<style type="text/css">
+			input{width: 100%}
+			input.radio{width: 10%}
+			input.submit{width: 20%}
+			select{width: 100%}
+			ul{list-style-type: none}
+		</style>
+	</head>
+	<body>
+		<h2>совешенно бессмысленный опрос</h2>
+		<form class="container" action="/process">
+			<h4>обо мне</h4>
+			<div class="row">
+				<div class="col-md-4">возраст</div>
+				<div class="col-md-4"><input type="number" name="age"></div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">гендер</div>
+				<select name="gender" class="col-md-4">
+					<option value="male">м</option>
+					<option value="female">ж</option>
+					<option value="other">другой</option>
+				</select>
+			</div>
+			<div class="row">
+				<div class="col-md-4">ваше имя начинается с буквы, обычно обозначающей звук:</div>
+				<select name="name_letter" class="col-md-4">
+					<option value="front">гласный (а/о/у/э/(ы?))</option>
+					<option value="non_front">гласный (ю/ё/ю/е/и)</option>
+					<option value="voiceless_plosive">глухой взрывной согласный (к/п/т)</option>
+					<option value="voiced_plosive">звонкий взрывной (г/б/д)</option>
+					<option value="voiceless_fricative">глухой фрикативный (с/ш/х/ф)</option>
+					<option value="voiced_fricative">звонкий фрикативный (з/ж/в)</option>
+					<option value="affricate">аффрикату (ц/ч)</option>
+					<option value="trill">звонкий дрожащий (р)</option>
+					<option value="nasal">носовой (вроде?) (м/н)</option>
+					<option value="lateral">латеральный (л)</option>
+				</select>
+			</div>
+			<h2>отвечайте пожалуйста</h2>
+            {% for question in questions %}
+			    <div class="row">
+				    <p class="col-md-6">{{question.text}}</p>
+					<table class="col-md-8">
+						<tr>
+							<td><input class="radio" type="radio" name="q{{ question.id }}" value=5></td>
+							<td><input class="radio" type="radio" name="q{{ question.id }}" value=4></td>
+							<td><input class="radio" type="radio" name="q{{ question.id }}" value=3></td>
+							<td><input class="radio" type="radio" name="q{{ question.id }}" value=2></td>
+							<td><input class="radio" type="radio" name="q{{ question.id }}" value=1></td>
+						</tr>
+						<tr>
+							<td>да, очень!</td>
+							<td>да, довольно приятно иметь буквы</td>
+							<td>мне всё равно</td>
+							<td>не очень нравится это</td>
+							<td>мне очень не нравится!!!</td>
+						</tr>
+					</table>
+			    </div>
+            {% endfor %}
+			<div class="row">
+				<input class="submit" type="submit" name="submit" value="Отправить">
+			</div>
+		</form>
+	</body>
+</html>
